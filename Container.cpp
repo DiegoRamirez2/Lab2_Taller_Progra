@@ -1,5 +1,5 @@
 #include "Container.h"
-
+using namespace std;
 /*
     * Container->Constructor: Constructor of the class Container.
     * Parameters:
@@ -9,6 +9,7 @@
 */
 Container::Container(int space){
     free_space = space;
+    initial_space = space;
     this->conjunto = new vector<int>();
 }
 /*
@@ -72,5 +73,30 @@ void Container::print(){
             cout << conjunto->at(i) << ", ";
         }
     }
-
+}
+/*
+*/
+int Container::getMinimunElem(){
+    return *min_element(conjunto->begin(), conjunto->end());
+}
+/*
+*/
+string Container::makeKey(){
+    string key = "";
+    int cont = 0;
+    for(int i=0; i<conjunto->size(); i++){
+        if(i+1 == conjunto->size()){
+            key += to_string(conjunto->at(i));
+        }
+        else{
+            key += to_string(conjunto->at(i)) + "|";
+        }
+        cont++;
+    }
+    return key;
+}
+/*
+*/
+int Container::getFreeSpace(){
+    return free_space;
 }
